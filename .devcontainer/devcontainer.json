@@ -1,0 +1,19 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+    "name": "Node.js",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    // "workspaceFolder": "/workspace",
+    "customizations": {
+        "extensions": [
+            // common
+            "WakaTime.vscode-wakatime",
+            "leodevbro.blockman",
+            "streetsidesoftware.code-spell-checker",
+            "github.vscode-github-actions",
+            "GitHub.copilot"
+        ]
+    },
+}
