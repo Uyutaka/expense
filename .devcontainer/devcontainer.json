@@ -5,15 +5,12 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
-    // "workspaceFolder": "/workspace",
-    "customizations": {
-        "extensions": [
-            // common
-            "WakaTime.vscode-wakatime",
-            "leodevbro.blockman",
-            "streetsidesoftware.code-spell-checker",
-            "github.vscode-github-actions",
-            "GitHub.copilot"
-        ]
-    },
+    "extensions": [
+        // common
+        "WakaTime.vscode-wakatime",
+        "leodevbro.blockman",
+        "streetsidesoftware.code-spell-checker",
+        "github.vscode-github-actions",
+        "GitHub.copilot"
+    ]
 }
