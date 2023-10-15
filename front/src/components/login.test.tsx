@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import Login from './login'
 describe('Login', () => {
-    it("should render 'Login' text", () => {
+    it("should render 'Welcome' text", () => {
         render(<Login />)
-        expect(screen.getByText('Login')).toBeInTheDocument()
+        expect(screen.getByText('Welcome')).toBeInTheDocument()
     })
     it("should render 'Email' and 'Password' text", () => {
         render(<Login />)
@@ -16,5 +16,9 @@ describe('Login', () => {
         expect(inputEmail).toBeInTheDocument()
         const inputPassword = screen.getByRole('textbox', { name: 'password' })
         expect(inputPassword).toBeInTheDocument()
+    })
+    it("should render login button", () => {
+        render(<Login />)
+        expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument()
     })
 })
