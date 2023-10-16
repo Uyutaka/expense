@@ -1,6 +1,8 @@
+import axios from 'axios'
+import { useState } from 'react'
 
 export default function Login() {
-
+    const [isAPISuccess, setIsAPISuccess] = useState(false)
     return (
         <>
             <h1>Welcome</h1>
@@ -11,7 +13,11 @@ export default function Login() {
                 <label htmlFor="password">Password</label>
                 <input type="text" id="password" aria-label="password" />
                 <br />
-                <button>Login</button>
+                <button onClick={async () => {
+                    await axios.post('/login', { email: '', password: '', csrf: 'csrf' })
+                    setIsAPISuccess(true)
+                }}>Login</button>
+                {isAPISuccess && <div>success</div>}
             </div>
         </>
     )
