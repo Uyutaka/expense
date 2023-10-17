@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import Login from './login'
 import userEvent from '@testing-library/user-event'
 import axios from 'axios';
+import { act } from 'react-dom/test-utils';
 const mockPost = jest.spyOn(axios, 'post').mockResolvedValue(undefined)
 
 describe('Login', () => {
@@ -25,14 +26,26 @@ describe('Login', () => {
         render(<Login />)
         expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument()
     })
-    it("should render 'success' after clicking login button with valid email & pwd", async() => {
-        render(<Login />)
-        userEvent.click(screen.getByRole('button', { name: 'Login' }))
-
+    it("should render 'success' after clicking login button with valid email & pwd", async () => {
         mockPost.mockResolvedValueOnce({ data: { success: true } })
-        expect(mockPost).toHaveBeenCalledWith('/login', { email: '', password: '', csrf: 'csrf' })
+
+
+        render(<Login />)
+        act(() => {
+            userEvent.type(screen.getByRole('textbox', { name: 'email' }), 'email')
+            userEvent.type(screen.getByRole('textbox', { name: 'password' }), 'pwd')
+            userEvent.click(screen.getByRole('button', { name: 'Login' }))
+        })
+
+        expect(mockPost).toHaveBeenCalledWith('/login', { email: 'email', password: 'pwd', csrf: 'csrf' })
         await waitFor(() => {
             expect(screen.getByText('success')).toBeInTheDocument()
         })
+
+    })
+    it("should render unclickable button when there are not email and password", async () => {
+        render(<Login />)
+        userEvent.click(screen.getByRole('button', { name: 'Login' }))
+        expect(screen.getByRole('button', { name: 'Login' })).toHaveAttribute('disabled')
     })
 })
